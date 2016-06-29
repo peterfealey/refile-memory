@@ -1,8 +1,8 @@
 require "refile"
-require "refile/memory/version"
+require "refile/shopify/version"
 
 module Refile
-  module Memory
+  module Shopify
     class Backend
       extend Refile::BackendMacros
       attr_reader :directory

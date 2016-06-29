@@ -1,24 +1,23 @@
-# Refile::Memory
+# Refile::Shopify
 
-An in-memory backend for [Refile](https://github.com/elabs/refile).
+A ShopifyAPI backend for [Refile](https://github.com/elabs/refile).
 
-This probably isn't super useful, but it serves as an illustration on how to
-write backends for Refile.
+This is a work in progress, pull requests etc welcome. 
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'refile-memory'
+gem 'refile-shopify'
 ```
 
-Set up Refile to use the memory backend:
+Set up Refile to use the Shopify backend:
 
 ``` ruby
 Refile.configure do |config|
-  config.cache = Refile::Memory::Backend.new
-  config.store = Refile::Memory::Backend.new
+  config.cache = Refile::Shopify::Backend.new
+  config.store = Refile::Shopify::Backend.new
 end
 ```
 
