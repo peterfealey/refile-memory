@@ -20,19 +20,23 @@ module Refile
 
         @store[id] = uploadable.read
 
-        Refile::File.new(self, id)
+        #Refile::File.new(self, id)
+        ShopifyAPI::Asset.new(:key => uploadable.original_filename, :attach => uploadable.tempfile)
       end
 
       verify_id def get(id)
-        Refile::File.new(self, id)
+        #Refile::File.new(self, id)
+        ShopifyAPI::Asset.new(:key => id.original_filename, :attach => uploadable.tempfile)
       end
 
       verify_id def delete(id)
-        @store.delete(id)
+        #@store.delete(id)
+        ShopifyAPI::Asset.destroy(id)
       end
 
       verify_id def open(id)
-        StringIO.new(@store[id])
+        ShopifyAPI::Asset.find(id)
+        #StringIO.new(@store[id])
       end
 
       verify_id def read(id)
