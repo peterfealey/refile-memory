@@ -8,7 +8,26 @@ module Refile
       attr_reader :directory
 
       attr_reader :max_size
-
+	  
+	  def verify_uploadable(method)
+      mod = Module.new do
+        define_method(method) do |uploadable|
+          # [:size, :read, :eof?, :rewind, :close].each do |m|
+#             unless uploadable.respond_to?(m)
+#               raise Refile::InvalidFile, "does not respond to `#{m}`."
+#             end
+#           end
+          if max_size and uploadable.size > max_size
+            raise Refile::InvalidMaxSize, "#{uploadable.inspect} is too large"
+          end
+          super(uploadable)
+        end
+      end
+      prepend mod
+    end
+	  
+	  
+	  
       def initialize(max_size: nil, hasher: Refile::RandomHasher.new)
         @hasher = hasher
         @max_size = max_size
