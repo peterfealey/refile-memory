@@ -8,6 +8,20 @@ module Refile
       attr_reader :directory
 
       attr_reader :max_size
+      
+      def verify_id(method)
+		  mod = Module.new do
+			define_method(method) do |id|
+			  id = self.class.decode_id(id)
+			  # if self.class.valid_id?(id)
+# 				super(id)
+# 			  else
+# 				raise Refile::InvalidID
+# 			  end
+			end
+		  end
+		  prepend mod
+      end
 	  
 	  def verify_uploadable(method)
       mod = Module.new do
